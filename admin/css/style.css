@@ -1,0 +1,110 @@
+.lovat-alert {
+    margin: 20px auto;
+    padding: 20px;
+    position: relative;
+    border-radius: 5px;
+    box-shadow: 0 0 15px 5px #ccc;
+}
+
+.close-lovat-alert {
+    position: absolute;
+    width: 20px;
+    height: 20px;
+    opacity: 0.5;
+    border-width: 1px;
+    border-style: solid;
+    border-radius: 50%;
+    right: 15px;
+    top: 17px;
+    text-align: center;
+    font-size: 27px;
+    cursor: pointer;
+}
+
+.lovat-alert.warning-alert {
+    background-color: #ffd48a;
+}
+
+.lovat-alert.success-alert {
+    background-color: #a8f0c6;
+}
+
+.lovat-alert.danger-alert {
+    background-color: #f7a7a3;
+}
+
+.lovat-alert.simple-alert {
+    background-color: #ebebeb;
+}
+
+/* END ALERTS */
+#wrap-lovat {
+    width: 99%;
+    margin-top: 20px;
+    font-family: 'InterMedium', 'sans-serif';
+}
+
+.admin-alert, .admin-generate-key-button {
+    font-size: 13px;
+}
+
+.button-generate {
+    margin-bottom: 20px;
+    margin-top: 20px;
+}
+
+.lovat-white-block {
+    border-radius: 3px;
+    background-color: #ffffff;
+    box-shadow: 0 0 0 1px rgba(63, 63, 68, 0.05), 0 1px 3px 0 rgba(63, 63, 68, 0.15);
+    padding: 20px;
+}
+
+.table-data-keys {
+    font-size: 13px;
+}
+
+#lovat-api-generated-keys {
+    text-align: center;
+}
+
+.lovat-data-table tr {
+    font-family: 'InterMedium', 'sans-serif';
+}
+
+.lovat-data-table td {
+    background-color: #fff !important;
+}
+
+.departure-address {
+    margin-top: 25px;
+}
+
+.lovat-generate-departure-country {
+    margin-top: 10px !important;
+}
+
+.departure-select-country {
+    margin-top: 10px;
+}
+
+@font-face {
+    font-family: "InterMedium";
+    src: url("../fonts/Inter-Medium.woff") format("woff");
+    font-style: normal;
+    font-weight: normal;
+}
+
+@font-face {
+    font-family: "InterRegular";
+    src: url("../fonts/Inter-Regular.woff") format("woff");
+    font-style: normal;
+    font-weight: normal;
+}
+
+@font-face {
+    font-family: "InterSemiBold";
+    src: url("../fonts/Inter-SemiBold.woff") format("woff");
+    font-style: normal;
+    font-weight: normal;
+}
