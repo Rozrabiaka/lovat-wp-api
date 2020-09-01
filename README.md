@@ -19,3 +19,14 @@ Authorization: Bearer Token
 `from` `to` -> формат даты
 
 `p` -> integer (пагинация), по дефолту = 1
+
+URL запроса 
+```
+/wp-json/v1/orders?from=date&to=date&p=integer
+```
+
+Пример URL запроса 
+
+```
+http://localhost/wp-json/v1/orders?from=15.08.2020&to=30.08.2020&p=1
+```
