@@ -14,6 +14,8 @@ WordPress WooCommerce REST API Lovat Api
 ```
 Authorization: Bearer Token
 ```
-Параметры `from`, `to,`, `p`
+Параметры `from`, `to`, `p`
+
 `from`, `to` -> формат даты
+
 `p` -> integer (пагинация), по дефолту = 1
