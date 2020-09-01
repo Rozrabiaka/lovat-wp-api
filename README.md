@@ -24,9 +24,11 @@ URL запроса
 ```
 /wp-json/v1/orders?from=date&to=date&p=integer
 ```
-
+ 
 Пример URL запроса 
 
 ```
 http://localhost/wp-json/v1/orders?from=15.08.2020&to=30.08.2020&p=1
 ```
+
+Поиск происходит по таким статусам как `completed` и `refunded`
