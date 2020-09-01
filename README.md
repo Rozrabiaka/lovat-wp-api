@@ -8,3 +8,9 @@ WordPress WooCommerce REST API Lovat Api
 Загрузите расширение в виде ZIP-файла из этого репозитория по директории wp-content/plugins
 
 Далее активируйте плагин и получите ключь доступа в настройках.
+
+Авторизацию запросов используйте 
+
+```
+Authorization: Bearer Token
+```
