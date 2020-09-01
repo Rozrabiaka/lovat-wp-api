@@ -20,6 +20,28 @@
                     value="<?php esc_attr_e('Сгенерировать ключь', 'lovat'); ?>"><?php esc_html_e('Сгенерировать ключь', 'lovat'); ?></button>
         </form>
     </div>
+
+    <div class="departure-address lovat-white-block">
+        Пожалуйста выберете страну отправки
+        <form name="save-lovat-departure-country" method="post">
+            <label>
+                <select class="departure-select-country" name="departure-select-country">
+                    <option value="" selected disabled hidden>Выберете страну отправки</option>
+					<?php foreach ($arrayCountries as $key => $countries): ?>
+						<?php if ($issetCountry == $key): ?>
+                            <option value="<?php echo $key ?>" selected><?php echo $countries ?></option>
+						<?php else: ?>
+                            <option value="<?php echo $key ?>"><?php echo $countries ?></option>
+						<?php endif; ?>
+					<?php endforeach; ?>
+                </select>
+            </label>
+            <br>
+            <input type="submit" class="button-primary lovat-generate-departure-country" name="save-departure-country"
+                   value="Сохранить">
+        </form>
+    </div>
+
     <div class="table-data-keys lovat-data-table lovat-white-block">
         <table id="lovat-api-generated-keys" class="display">
             <thead>
@@ -44,27 +66,6 @@
             <h4>На данный момент небыло созданого не единого Bearer Token ключа. Пожалуйста, нажмите на кнопку
                 "Сгенерировать ключь", чтобы получить ключь доступа к Lovat Api запросов</h4>
 		<?php endif; ?>
-    </div>
-
-    <div class="departure-address lovat-white-block">
-        Пожалуйста выберете страну отправки
-        <form name="save-lovat-departure-country" method="post">
-            <label>
-                <select class="departure-select-country" name="departure-select-country">
-                    <option value="" selected disabled hidden>Выберете страну отправки</option>
-					<?php foreach ($arrayCountries as $key => $countries): ?>
-						<?php if ($issetCountry == $key): ?>
-                            <option value="<?php echo $key ?>" selected><?php echo $countries ?></option>
-						<?php else: ?>
-                            <option value="<?php echo $key ?>"><?php echo $countries ?></option>
-						<?php endif; ?>
-					<?php endforeach; ?>
-                </select>
-            </label>
-            <br>
-            <input type="submit" class="button-primary lovat-generate-departure-country" name="save-departure-country"
-                   value="Сохранить">
-        </form>
     </div>
 </div>
 
