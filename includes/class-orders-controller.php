@@ -67,55 +67,65 @@ class Orders_Controller extends WP_REST_Controller
 				'date_created' => $dateValidationResult['from'] . '...' . $dateValidationResult['to'],
 				'limit' => self::LIMIT,
 				'offset' => $offset,
+				'version' => '4.4.1',
 			);
 
 			$orders = wc_get_orders($arrayOrdersArguments);
-			$helper = new Lovat_Helper();
-			$departureCountry = $helper->get_lovat_option_value();
 
-			$lovatDataArray = array();
+			if (!empty($orders)) {
+				$helper = new Lovat_Helper();
+				$departureCountry = $helper->get_lovat_option_value();
+				$orderRefunded = new Automattic\WooCommerce\Admin\Overrides\OrderRefund();
 
-			foreach ($orders as $data) {
-				$lovatDataArray[$data->get_id()] = array(
-					'id' => $data->get_id(),
-					'transaction_id' => $data->get_transaction_id(),
-					'total' => $data->get_total(),
-					'currency' => $data->get_currency(),
-					'status' => $data->get_status(),
-					'total_tax' => $data->get_total_tax(),
-					'customer_ip_address' => $data->get_customer_ip_address(),
-					'country' => $data->get_shipping_country(),
-					'city' => $data->get_shipping_city(),
-					'get_shipping_address_1' => $data->get_shipping_address_1(),
-					'rate_code' => null,
-					'rate_id' => null,
-					'label' => null,
-					'departure_address' => $departureCountry
-				);
+				$lovatDataArray = array();
 
-				if (!empty($data->get_taxes())) {
-					foreach ($data->get_taxes() as $key => $taxes) {
-						$lovatDataArray[$data->get_id()]['rate_code'] = $taxes->get_rate_code();
-						$lovatDataArray[$data->get_id()]['rate_id'] = $taxes->get_rate_id();
-						$lovatDataArray[$data->get_id()]['label'] = $taxes->get_label();
+				foreach ($orders as $data) {
+					if (get_class($data) == get_class($orderRefunded)) continue;
+
+					$lovatDataArray[$data->get_id()] = array(
+						'id' => $data->get_id(),
+						'transaction_id' => $data->get_transaction_id(),
+						'date_completed_gmt' => $data->get_date_completed(),
+						'total' => $data->get_total(),
+						'currency' => $data->get_currency(),
+						'status' => $data->get_status(),
+						'total_tax' => $data->get_total_tax(),
+						'customer_ip_address' => $data->get_customer_ip_address(),
+						'country' => $data->get_shipping_country(),
+						'city' => $data->get_shipping_city(),
+						'get_shipping_address_1' => $data->get_shipping_address_1(),
+						'rate_code' => null,
+						'rate_id' => null,
+						'label' => null,
+						'departure_address' => $departureCountry
+					);
+
+					if (!empty($data->get_taxes())) {
+						foreach ($data->get_taxes() as $key => $taxes) {
+							$lovatDataArray[$data->get_id()]['rate_code'] = $taxes->get_rate_code();
+							$lovatDataArray[$data->get_id()]['rate_id'] = $taxes->get_rate_id();
+							$lovatDataArray[$data->get_id()]['label'] = $taxes->get_label();
+						}
 					}
+
+				}
+
+				$remainingData = $this->remainingAmount($p);
+
+				if (!empty($lovatDataArray)) {
+					return array(
+						'remaining_data' => $remainingData,
+						'orders_data' => $lovatDataArray
+					);
 				}
 			}
 
-			$remainingData = $this->remainingAmount($p);
-
-			if (!empty($lovatDataArray)) return array(
-				'remaining_data' => $remainingData,
-				'orders_data' => $lovatDataArray
+			return new WP_Error('HTTP_NOT_FOUND',
+				__("Не удалось найти данные по вашему запросу", 'rest-tutorial'),
+				array(
+					'status' => 200,
+				)
 			);
-			else {
-				return new WP_Error('HTTP_NOT_FOUND',
-					__("Не удалось найти данные по вашему запросу", 'rest-tutorial'),
-					array(
-						'status' => 200,
-					)
-				);
-			}
 		}
 	}
 
