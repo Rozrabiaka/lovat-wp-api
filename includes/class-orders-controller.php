@@ -75,12 +75,12 @@ class Orders_Controller extends WP_REST_Controller
 			if (!empty($orders)) {
 				$helper = new Lovat_Helper();
 				$departureCountry = $helper->get_lovat_option_value();
-				$orderRefunded = new Automattic\WooCommerce\Admin\Overrides\OrderRefund();
+				$orderClass = get_class(new Automattic\WooCommerce\Admin\Overrides\Order());
 
 				$lovatDataArray = array();
 
 				foreach ($orders as $data) {
-					if (get_class($data) == get_class($orderRefunded)) continue;
+					if (get_class($data) != $orderClass) continue;
 
 					$lovatDataArray[$data->get_id()] = array(
 						'id' => $data->get_id(),
